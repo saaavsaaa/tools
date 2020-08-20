@@ -7,8 +7,9 @@ public class MergeSort {
     public static void sort(final int[] input) {
         if (input.length == 1) return;
 //        Printer.INSTANCE.setWillPrint(true);
-        split(0, input.length, input);
-        Printer.INSTANCE.printArray(input);
+//        split(0, input.length, input);
+        loop_split(0, input.length, input);
+//        Printer.INSTANCE.printArray(input);
     }
 
     /*
@@ -27,18 +28,35 @@ public class MergeSort {
     }
 
     private static void loop_split(final int low, final int high, final int[] input) {
-        int l = low;
-        int h = high;
-        while (l < h) {
-            int splitPoint = (h + l) / 2;
+        int cover = 0;
+        int step = 1;
+        while (cover < input.length) {
+//            int swap = input[low];
+//            if (input[low] > input[low + step]) {
+//                unite(low, low + step, low + 2*step, input);
+//            }
+            cover = step * 2;
 
-            Printer.INSTANCE.printArray(l, h, input);
+            for (int i = 0; i < input.length; i += cover) {
+                int start = i + low;
+                if (start + step > input.length) {
+                    unite(i - cover, i, input.length, input);
+                }
+                unite(start, start+ step, start + 2 * step, input);
+            }
+            Printer.INSTANCE.printArray(low, 2*step, input);
 
-
+            step++;
         }
     }
 
-    private static int unite(final int low, final int splitPoint, final int high, final int[] input) {
+    private static void collect(int low, int splitPoint, int high, final int[] input) {
+
+    }
+
+    // 为了不申请空间，用了更多的循环次数，并非真正的归并，在极端情况下，归并前半段执行结束后，后半段还会内部继续比较
+    private static int unite(int low, int splitPoint, int high, final int[] input) {
+        if (high > input.length) high = input.length;
         int a = low;
         int b = splitPoint;
         int loop = 0;
@@ -51,6 +69,11 @@ public class MergeSort {
                 input[b] = currentA;
             }
             a++;
+            if (a >= b) {
+                if (high - a < 2) { b++; continue; }
+                splitPoint = (a + high) / 2;
+                b = splitPoint;
+            }
         }
         Printer.INSTANCE.printArray(low, high, input);
         System.out.println("loop:" + loop);

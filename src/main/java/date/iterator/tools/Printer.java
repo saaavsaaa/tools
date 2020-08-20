@@ -1,12 +1,20 @@
 package date.iterator.tools;
 
-public class Printer {
+public enum  Printer {
 
-    public static void printArray(final int[] list) {
+    INSTANCE;
+
+    private boolean willPrint;
+
+    public void printArray(final int[] list) {
         printArray(0 , list.length, list);
     }
 
-    public static void printArray(final int low, final int high, final int[] list) {
+    public void printArray(final int low, final int high, final int[] list) {
+        if (!willPrint) {
+            return;
+        }
+
         System.out.println("---------------------------------------------------");
         int index = low;
         while (index < high) {
@@ -16,9 +24,13 @@ public class Printer {
         System.out.println("---------------------------------------------------");
     }
 
-    public static <T> void printArray(final T[] list) {
+    public <T> void printArray(final T[] list) {
         for (T t : list) {
             System.out.println(t);
         }
+    }
+
+    public void setWillPrint(boolean willPrint) {
+        this.willPrint = willPrint;
     }
 }
