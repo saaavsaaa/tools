@@ -6,8 +6,9 @@ public class MergeSort {
     // todo 完成后改为泛型，并用equals比较
     public static void sort(final int[] input) {
         if (input.length == 1) return;
+//        Printer.INSTANCE.setWillPrint(true);
         split(0, input.length, input);
-        Printer.printArray(input);
+        Printer.INSTANCE.printArray(input);
     }
 
     /*
@@ -17,12 +18,24 @@ public class MergeSort {
         if (high - low == 1) { return low; }
         int splitPoint = (high + low) / 2;
 
-        // Printer.printArray(low, high, input);
+        Printer.INSTANCE.printArray(low, high, input);
 
         split(low, splitPoint, input);
         split(splitPoint, high, input);
 
         return unite(low, splitPoint, high, input);
+    }
+
+    private static void loop_split(final int low, final int high, final int[] input) {
+        int l = low;
+        int h = high;
+        while (l < h) {
+            int splitPoint = (h + l) / 2;
+
+            Printer.INSTANCE.printArray(l, h, input);
+
+
+        }
     }
 
     private static int unite(final int low, final int splitPoint, final int high, final int[] input) {
@@ -39,7 +52,7 @@ public class MergeSort {
             }
             a++;
         }
-        Printer.printArray(low, high, input);
+        Printer.INSTANCE.printArray(low, high, input);
         System.out.println("loop:" + loop);
         return low;
     }
