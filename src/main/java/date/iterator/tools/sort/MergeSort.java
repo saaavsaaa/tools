@@ -1,10 +1,10 @@
-package date.iterator.tools;
+package date.iterator.tools.sort;
+
+import date.iterator.tools.Printer;
 
 public class MergeSort {
     // todo 完成后改为泛型，并用equals比较
     public static void sort(final int[] input) {
-        Printer.printArray(input);
-        System.out.println("---------------");
         if (input.length == 1) return;
         split(0, input.length, input);
         Printer.printArray(input);
@@ -17,7 +17,7 @@ public class MergeSort {
         if (high - low == 1) { return low; }
         int splitPoint = (high + low) / 2;
 
-//        test(low, high, splitPoint, input);
+        // Printer.printArray(low, high, input);
 
         split(low, splitPoint, input);
         split(splitPoint, high, input);
@@ -39,18 +39,8 @@ public class MergeSort {
             }
             a++;
         }
+        Printer.printArray(low, high, input);
         System.out.println("loop:" + loop);
         return low;
-    }
-
-    private static void test(final int low, final int high, final int splitPoint, final int[] input) {
-        int[] a = new int[splitPoint];
-        int[] b = new int[high - splitPoint];
-        System.arraycopy(input, 0, a, 0, splitPoint);
-        System.arraycopy(input, splitPoint, b, 0, high - splitPoint);
-        Printer.printArray(a);
-        System.out.println("---------------");
-        Printer.printArray(b);
-        System.out.println("---------------");
     }
 }
