@@ -22,6 +22,7 @@ public enum  Printer {
             index++;
         }
         System.out.println("---------------------------------------------------");
+        setWillPrint(false);
     }
 
     public <T> void printArray(final T[] list) {
