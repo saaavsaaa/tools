@@ -7,6 +7,10 @@ public class MergeSort {
     // 除非极端不想新开辟空间，否则不推荐使用
     private boolean saveSpace;
 
+    public void sort(final int[] input) {
+        recursiveSort(input);
+    }
+
     // todo 完成后改为泛型，并用equals比较
     public void circulatingSort(final int[] input) {
         if (input.length == 1) return;
@@ -53,13 +57,13 @@ public class MergeSort {
             }
             Printer.INSTANCE.printArray(low, 2*step, input);
 
-            step++;
+            step *= 2;
             cover = step * 2;
         }
     }
 
     private void gather(final int low, final int splitPoint, final int high, final int[] input) {
-        if (saveSpace) {
+        if (!saveSpace) {
             collect(low, splitPoint, high, input);
         } else {
             unite(low, splitPoint, high, input);

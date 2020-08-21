@@ -5,13 +5,13 @@ import org.junit.Test;
 
 public class MergeSortTest {
 
-//    @Test
+    @Test
     public void test(){
         int[] input = new int[]{1, 3, 2, 4, 5, 1, 6, 5, 11};
 //        input = new int[]{1, 5, 6, 2, 6, 7};
 //        input = new int[]{1, 2, 6, 2, 3, 4};
         MergeSort sort = new MergeSort();
-        sort.circulatingSort(input);
+        sort.sort(input);
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
     }
@@ -23,6 +23,7 @@ public class MergeSortTest {
         sort.circulatingSort(input);
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
+        Printer.INSTANCE.printIn();
     }
 
     @Test
@@ -32,6 +33,7 @@ public class MergeSortTest {
         sort.recursiveSort(input);
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
+        Printer.INSTANCE.printIn();
     }
 
     @Test
@@ -42,6 +44,7 @@ public class MergeSortTest {
         sort.circulatingSort(input);
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
+        Printer.INSTANCE.printIn();
     }
 
     @Test
@@ -52,5 +55,6 @@ public class MergeSortTest {
         sort.recursiveSort(input);
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
+        Printer.INSTANCE.printIn();
     }
 }
