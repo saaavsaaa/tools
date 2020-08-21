@@ -6,6 +6,17 @@ public enum  Printer {
 
     private boolean willPrint;
 
+    private int in = 0;
+
+    public void runAt() {
+        in++;
+    }
+
+    public void printIn() {
+        System.out.println(in);
+        in = 0;
+    }
+
     public void printArray(final int[] list) {
         printArray(0 , list.length, list);
     }
