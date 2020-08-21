@@ -13,7 +13,7 @@ public enum  Printer {
     }
 
     public void printIn() {
-        System.out.println(in);
+        System.out.println("in:" + in);
         in = 0;
     }
 
