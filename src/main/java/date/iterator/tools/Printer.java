@@ -12,8 +12,8 @@ public enum  Printer {
         in++;
     }
 
-    public void printIn() {
-        System.out.println("in:" + in);
+    public void printIn(final String title) {
+        System.out.println(title + " in:" + in);
         in = 0;
     }
 
