@@ -2,6 +2,7 @@ package date.iterator.tools.sort;
 
 import date.iterator.tools.Printer;
 
+// todo 完成后改为泛型，并用equals比较
 public class MergeSort {
 
     // 除非极端不想新开辟空间，否则不推荐使用
@@ -11,12 +12,17 @@ public class MergeSort {
         recursiveSort(input);
     }
 
-    // todo 完成后改为泛型，并用equals比较
+    /*
+    * 突发奇想，想用循环试试，不过效果并不好，由于递归是在以切分的基础上再次切分，而这个循环是每次重新分，所以递归的效率比这个循环好
+    */
     public void circulatingSort(final int[] input) {
         if (input.length == 1) return;
         loop(0, input.length, input);
     }
 
+    /*
+    * 递做气氛，归做排序，递归都用上了
+    */
     public void recursiveSort(final int[] input) {
         if (input.length == 1) return;
         split(0, input.length, input);
@@ -56,7 +62,6 @@ public class MergeSort {
                 gather(a, b, c, input);
             }
             Printer.INSTANCE.printArray(low, 2*step, input);
-
             step *= 2;
             cover = step * 2;
         }
@@ -91,28 +96,72 @@ public class MergeSort {
         }
     }
 
-    // 为了不申请空间，用了更多的循环次数，并非真正的归并，在极端情况下，归并前半段执行结束后，后半段还会内部继续比较
-    // 虽然可以继续优化，不过就算了，轻易也用不上
-    private void unite(int low, int splitPoint, int high, final int[] input) {
+    // 为了不申请空间，用了更多的循环次数，并非真正的归并
+    // 感觉挺有意思，但是不实用，写着玩的
+    private void unite(final int low, final int splitPoint, int high, final int[] input) {
         if (high > input.length) high = input.length;
+        if (high - low == 1) return;
         int a = low;
         int b = splitPoint;
-        while (a < splitPoint && b < high) {
+
+        while (a < splitPoint || b < high) {
             Printer.INSTANCE.runAt();
-            int currentA = input[a];
-            int currentB = input[b];
-            if (currentA > currentB)  {
-                input[a] = currentB;
-                input[b] = currentA;
+            boolean swapped = false;
+            if (input[a] == input[b]) {
+                a++;
+                swap(a, b, input);
+                swapped = true;
+            } else if (input[a] > input[b])  {
+                swap(a, b, input);
+                swapped = true;
             }
             a++;
-            if (a >= b) {
-                if (high - a < 2) { b++; continue; }
-                splitPoint = (a + high) / 2;
-                b = splitPoint;
+
+            if (swapped) { //需要把current到splitPoint，依次后移，然后b++，接着才能再归并
+                if (b != a) {
+                    int current = input[b];
+                    int position = b;
+                    while (position > a) {
+                        input[position] = input[position--];
+                    }
+                    input[position] = current;
+                }
+                b++;
             }
         }
         Printer.INSTANCE.printArray(low, high, input);
+    }
+
+    private boolean check(final int a, final int b, final int[] input) {
+        int low = a;
+        boolean swapped = false;
+        if (input[low] == input[b]) {
+            low++;
+            swap(low, b, input);
+            swapped = true;
+        } else if (input[a] > input[b])  {
+            swap(a, b, input);
+            swapped = true;
+        }
+        low++;
+
+        if (swapped) { //需要把current到splitPoint，依次后移，然后b++，接着才能再归并
+            int current = input[b];
+            int position = b;
+            while (position > low) {
+                input[position] = input[position--];
+            }
+            input[position] = current;
+        }
+        return swapped;
+    }
+
+    private void swap(final int a, final int b, final int[] input) {
+        if (input[a] > input[b]) {
+            int current = input[a];
+            input[a] = input[b];
+            input[b] = current;
+        }
     }
 
     public void setSaveSpace(boolean saveSpace) {
