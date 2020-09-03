@@ -23,7 +23,11 @@ public class ConvertsTest {
     }
 
     @Test
-    public void testLenght() {
-        Converts.length(0xaaa, 16);
+    public void testLength() {
+        Stack<Integer> digit = Converts.length(0xabc, 16);
+        System.out.println("length : " + digit.size());
+        while (!digit.empty()) {
+            System.out.println(digit.pop());
+        }
     }
 }

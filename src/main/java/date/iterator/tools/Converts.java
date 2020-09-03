@@ -16,13 +16,17 @@ public class Converts {
         return eachDigit;
     }
 
-    public static void length(final int value, final int radix) {
+    public static Stack<Integer> length(final int value, final int radix) {
+        Stack<Integer> eachDigit = new Stack<>();
         int digitValue = value;
         int length = 1; // 长度
         while (digitValue > radix) {
             length++;
+            int current = digitValue;
             digitValue /= radix;
+            eachDigit.push(current - digitValue * radix); //余数
         }
-        System.out.println("length : " + length);
+        eachDigit.push(digitValue);
+        return eachDigit;
     }
 }
