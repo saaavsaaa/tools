@@ -9,7 +9,8 @@ public class PairCheck {
     private final Stack<Character> stack = new Stack<>();
 
     private Map<Character, Character> charPairs = new HashMap();
-    private Map<Character, Pair<String, String>> tagPairs = new HashMap();
+
+    private List<String> tags = new ArrayList<>();
 
     private List<Character> slighting = new ArrayList<>();
 
@@ -26,7 +27,7 @@ public class PairCheck {
                 stack.push(c);
             }
         }
-
+        Assert.assertTrue(stack.empty());
     }
 
     private Character ignore(Character c) {
@@ -37,15 +38,27 @@ public class PairCheck {
         return c;
     }
 
+    public void checkTags(final String input) {
+        String currentTag = "";
+        for (char c : input.toCharArray()) {
+            if (c == '>') {
+                currentTag += stack.pop();
+                continue;
+            } else {
+                stack.push(c);
+            }
+        }
+    }
+
     public Map<Character, Character> getCharPairs() {
         return charPairs;
     }
 
-    public Map<Character, Pair<String, String>> getTagPairs() {
-        return tagPairs;
-    }
-
     public List<Character> getSlighting() {
         return slighting;
+    }
+
+    public List<String> getTags() {
+        return tags;
     }
 }
