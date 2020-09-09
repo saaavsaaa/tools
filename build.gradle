@@ -13,13 +13,13 @@ repositories {
 
 dependencies {
     // https://mvnrepository.com/artifact/date.iterator.automaton/State
-    compile group: 'date.iterator.automaton', name: 'State', version: '1.0.1'
+//    compile group: 'date.iterator.automaton', name: 'State', version: '1.0.1'
 
     // https://mvnrepository.com/artifact/date.iterator.count/Iterator
-    providedCompile group: 'date.iterator.count', name: 'Iterator', version: '1.1.5'
+//    providedCompile group: 'date.iterator.count', name: 'Iterator', version: '1.1.5'
 
     // https://mvnrepository.com/artifact/com.saaavsaaa/zookeeper-client
-    providedCompile group: 'com.saaavsaaa', name: 'zookeeper-client', version: '2.5'
+//    providedCompile group: 'com.saaavsaaa', name: 'zookeeper-client', version: '2.5'
 
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'junit', name: 'junit', version: '4.12'
 }
