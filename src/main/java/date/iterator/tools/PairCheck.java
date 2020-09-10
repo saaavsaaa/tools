@@ -7,6 +7,7 @@ import java.util.*;
 
 public class PairCheck {
     private final Stack<Character> stack = new Stack<>();
+    private final Stack<String> tagStack = new Stack<>();
 
     private Map<Character, Character> charPairs = new HashMap();
 
@@ -38,7 +39,9 @@ public class PairCheck {
         return c;
     }
 
-    public void checkTags(final String input) {
+    public void checkTags(final String input) throws Exception {
+        int begin = -1;
+        int end = -1;
         for (char c : input.toCharArray()) {
             String currentTag = "";
             if (c == '>') {
@@ -48,8 +51,22 @@ public class PairCheck {
                     currentTag = current + currentTag;
                     current = stack.pop();
                 }
-                // todo 有限状态自动机
-                System.out.println(currentTag);
+                // todo 有限状态自动机 对特定的字符序列做状态跳转
+                // System.out.println(currentTag);
+                if (currentTag.startsWith("/")) {
+                    String tag = tagStack.pop();
+                    if (currentTag.substring(1).equals(tag)) {
+                        System.out.print(tag + " : ");
+                        while (!stack.empty()) {
+                            System.out.print(stack.pop());
+                        }
+                        System.out.println();
+                    } else {
+                        throw new Exception("tag不匹配");
+                    }
+                } else {
+                    tagStack.push(currentTag);
+                }
             } else {
                 stack.push(c);
             }

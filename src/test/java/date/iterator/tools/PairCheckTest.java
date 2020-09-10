@@ -35,6 +35,10 @@ public class PairCheckTest {
 
     @Test
     public void testTags() {
-        pair.checkTags("<abc>wsx</abc>");
+        try {
+            pair.checkTags("<abc>wsx</abc>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
