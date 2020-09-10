@@ -20,15 +20,21 @@ public class PairCheckTest {
         pair.getCharPairs().put(')', '(');
         pair.getCharPairs().put(']', '[');
         pair.getCharPairs().put('}', '{');
+        pair.getCharPairs().put('>', '<');
     }
 
     public void initTags() {
-        pair.getTagPairs().put('>' , new Pair<>("<tr>", "</tr>"));
+        pair.getTags().add("tr");
     }
 
     @Test
     public void testChars() {
         pair.checkChars("{a(b)[]}", true);
 //        pair.checkChars("{a(b)[]}", false);
+    }
+
+    @Test
+    public void testTags() {
+        pair.checkTags("<abc>wsx</abc>");
     }
 }

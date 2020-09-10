@@ -39,11 +39,17 @@ public class PairCheck {
     }
 
     public void checkTags(final String input) {
-        String currentTag = "";
         for (char c : input.toCharArray()) {
+            String currentTag = "";
             if (c == '>') {
-                currentTag += stack.pop();
-                continue;
+                Character expect = charPairs.get(c);
+                Character current = stack.pop();
+                while (!current.equals(expect)){
+                    currentTag = current + currentTag;
+                    current = stack.pop();
+                }
+                // todo 有限状态自动机
+                System.out.println(currentTag);
             } else {
                 stack.push(c);
             }
