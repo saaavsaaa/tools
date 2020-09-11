@@ -34,9 +34,19 @@ public class PairCheckTest {
     }
 
     @Test
-    public void testTags() {
+    public void testTag() {
         try {
             pair.checkTags("<abc>wsx</abc>");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testTags() {
+        try {
+            // 两个栈分别存 tag和内容，内容用字符串
+            pair.checkTags("<as>q<abc>wsx</abc>t</as>");
         } catch (Exception e) {
             e.printStackTrace();
         }

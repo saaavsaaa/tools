@@ -11,6 +11,8 @@ public class PairCheck {
 
     private Map<Character, Character> charPairs = new HashMap();
 
+    private Map<String, String> tagContent = new HashMap();
+
     private List<String> tags = new ArrayList<>();
 
     private List<Character> slighting = new ArrayList<>();
@@ -39,9 +41,61 @@ public class PairCheck {
         return c;
     }
 
+    // todo 有限状态自动机 对特定的字符序列做状态跳转
     public void checkTags(final String input) throws Exception {
-        int begin = -1;
-        int end = -1;
+        boolean inTag = false;
+        boolean changed = false;
+        String content = "";
+        String currentTag = "";
+        for (char c : input.toCharArray()) {
+            if (c == '>') {
+                inTag = !inTag;
+                if (currentTag.startsWith("/")) {
+                    String tagHead = tagStack.pop();
+                    if (currentTag.substring(1).equals(tagHead)) {
+                        String currentContent = content;
+                        if (tagContent.containsKey(tagHead)) {
+                            currentContent += tagContent.get(tagHead);
+                            tagContent.remove(tagHead);
+                        }
+                        System.out.print(tagHead + " : ");
+                        System.out.println(currentContent);
+                        currentTag = "";
+                        content = "";
+                    } else {
+                        throw new Exception("tag不匹配");
+                    }
+                } else {
+                    if (!tagStack.empty()) {
+                        String key = tagStack.peek();
+                        if (tagContent.containsKey(key)) {
+                            tagContent.put(key, tagContent.get(key) + content);
+                        } else {
+                            tagContent.put(key, content);
+                        }
+                    }
+                    // 标签外的暂时丢掉
+                    content = "";
+                    tagStack.push(currentTag);
+                    currentTag = "";
+                }
+            } else {
+                if (c == '<') {
+                    inTag = !inTag;
+                    continue;
+                }
+                if (inTag) {
+                    currentTag += c;
+                } else {
+                    content += c;
+                }
+            }
+        }
+    }
+
+    // 有 bug
+    @Deprecated
+    public void checkTag(final String input) throws Exception {
         for (char c : input.toCharArray()) {
             String currentTag = "";
             if (c == '>') {
@@ -51,7 +105,7 @@ public class PairCheck {
                     currentTag = current + currentTag;
                     current = stack.pop();
                 }
-                // todo 有限状态自动机 对特定的字符序列做状态跳转
+
                 // System.out.println(currentTag);
                 if (currentTag.startsWith("/")) {
                     String tag = tagStack.pop();
