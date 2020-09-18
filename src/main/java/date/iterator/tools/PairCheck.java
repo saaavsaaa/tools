@@ -1,5 +1,6 @@
 package date.iterator.tools;
 
+import date.iterator.tools.tree.TagTree;
 import javafx.util.Pair;
 import org.junit.Assert;
 
@@ -93,7 +94,60 @@ public class PairCheck {
         }
     }
 
-    // 有 bug
+    public void buildTagTree(final String input) throws Exception {
+        TagTree tree = new TagTree();
+
+        boolean inTag = false;
+        boolean changed = false;
+        String content = "";
+        String currentTag = "";
+        for (char c : input.toCharArray()) {
+            if (c == '>') {
+                inTag = !inTag;
+                if (currentTag.startsWith("/")) {
+                    String tagHead = tagStack.pop();
+                    if (currentTag.substring(1).equals(tagHead)) {
+                        String currentContent = content;
+                        if (tagContent.containsKey(tagHead)) {
+                            currentContent += tagContent.get(tagHead);
+                            tagContent.remove(tagHead);
+                        }
+                        System.out.print(tagHead + " : ");
+                        System.out.println(currentContent);
+                        currentTag = "";
+                        content = "";
+                    } else {
+                        throw new Exception("tag不匹配");
+                    }
+                } else {
+                    if (!tagStack.empty()) {
+                        String key = tagStack.peek();
+                        if (tagContent.containsKey(key)) {
+                            tagContent.put(key, tagContent.get(key) + content);
+                        } else {
+                            tagContent.put(key, content);
+                        }
+                    }
+                    // 标签外的暂时丢掉
+                    content = "";
+                    tagStack.push(currentTag);
+                    currentTag = "";
+                }
+            } else {
+                if (c == '<') {
+                    inTag = !inTag;
+                    continue;
+                }
+                if (inTag) {
+                    currentTag += c;
+                } else {
+                    content += c;
+                }
+            }
+        }
+    }
+
+    // 有 bug，只能处理单个不嵌套的情况
     @Deprecated
     public void checkTag(final String input) throws Exception {
         for (char c : input.toCharArray()) {
