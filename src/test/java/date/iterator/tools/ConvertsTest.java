@@ -35,7 +35,7 @@ public class ConvertsTest {
 
     @Test
     public void aaa() throws IOException {
-        String origin = "thunder://QUFodHRwOi8vb2sucmVuenVpZGEuY29tLzE5MTEvVETXr9SwLlRDx+XO+tbQ19aw5i5tcDRaWg==";
+        String origin = "thunder://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa==";
         origin = origin.substring(10);
         System.out.println(origin);
         BASE64Decoder decoder = new BASE64Decoder();
