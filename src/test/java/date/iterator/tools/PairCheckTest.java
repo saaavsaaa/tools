@@ -1,6 +1,5 @@
 package date.iterator.tools;
 
-import javafx.util.Pair;
 import org.junit.Before;
 import org.junit.Test;
 

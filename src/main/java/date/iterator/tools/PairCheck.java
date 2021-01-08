@@ -1,7 +1,6 @@
 package date.iterator.tools;
 
 import date.iterator.tools.tree.TagTree;
-import javafx.util.Pair;
 import org.junit.Assert;
 
 import java.util.*;
