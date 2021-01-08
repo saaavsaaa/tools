@@ -27,6 +27,9 @@ public class IPTree {
                 }
             }
             BitNode child = current.getChildren()[bits[i]];
+            if (sub - i == 1 && child != null) {
+                System.out.println(ip);
+            }
             if (child == null) {
                 child = new BitNode(value);
                 current.getChildren()[bits[i]] = child;
