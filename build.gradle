@@ -7,6 +7,9 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
+apply plugin: 'maven'
+apply plugin: 'signing'
+
 repositories {
     mavenCentral()
 }
@@ -22,4 +25,81 @@ dependencies {
 //    providedCompile group: 'com.saaavsaaa', name: 'zookeeper-client', version: '2.5'
 
     compile group: 'junit', name: 'junit', version: '4.12'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //为Pom文件做数字签名
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            if (isReleaseBuild()){
+                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                    authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                }
+            } else {
+                repository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                    authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                }
+            }
+
+            pom.project {
+                name project.name
+                packaging 'jar'
+                description 'tools'
+                url 'https://github.com/saaavsaaa/tools'
+
+                scm {
+                    url 'scm:git@github.com:saaavsaaa/tools.git'
+                    connection 'scm:git@github.com:saaavsaaa/tools.git'
+                    developerConnection 'git@github.com:saaavsaaa/tools.git'
+                }
+
+                licenses {
+                    license {
+                        name 'GNU General Public License v3.0'
+                        url 'https://www.gnu.org/licenses/gpl-3.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'saaav'
+                        name 'lidb'
+                    }
+                }
+            }
+        }
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('charSet', 'UTF-8')
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+def isReleaseBuild() {
+    return version.contains("SNAPSHOT") == false
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
 }
