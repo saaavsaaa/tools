@@ -35,13 +35,10 @@ public class Calculator {
         opTable[0][0] = 'D';
         opTable[0][8] = 'E';
         opTable[0][10] = 'E';
-        opTable[0][1] = 'I';
-        opTable[0][2] = 'I';
-        opTable[0][3] = 'I';
-        opTable[0][4] = 'I';
-        opTable[0][5] = 'I';
-        opTable[0][6] = 'I';
-        opTable[0][7] = 'I';
-        opTable[0][9] = 'I';
+        for (int i : new int[]{1, 2, 3, 4, 5, 6, 7, 9}) {
+            opTable[0][i] = 'I';
+        }
+
+        opTable[1][0] = 'I';
     }
 }
