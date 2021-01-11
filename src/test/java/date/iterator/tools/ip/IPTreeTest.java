@@ -59,13 +59,15 @@ public class IPTreeTest {
     @Test
     public void testToBinary() {
         // byte[] bytes = InetAddress.getByName("10.0.2.15").getAddress();
-        String expect = "11011100101101010010011010010110";
+        // 101.32.104.0 11001 01001 00000 01101 0 0000000000   21
+        String expect = "1100101001000000110100000000000"; // 11011100101101010010011010010110
+        String ip = "101.32.96.0"; // "220.181.38.150"
         long start = System.currentTimeMillis();
-        String actual = IPUtil.ip2binaryString("220.181.38.150");
+        String actual = IPUtil.ip2binaryString(ip);
         System.out.println(actual);
         System.out.println(System.currentTimeMillis() - start);
         start = System.currentTimeMillis();
-        int[] bits = IPUtil.ip2binary("220.181.38.150");
+        int[] bits = IPUtil.ip2binary(ip);
         for (int i = 0; i < bits.length; i++) {
             System.out.printf(String.valueOf(bits[i]));
         }

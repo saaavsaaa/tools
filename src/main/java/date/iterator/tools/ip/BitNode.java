@@ -7,6 +7,9 @@ public class BitNode {
 
     private String key;
 
+    // use to debug
+    private String ip;
+
     //private BitNode lChild;
     //private BitNode rChild;
 
@@ -73,5 +76,13 @@ public class BitNode {
         children[1] = rChild;
         //this.rChild = rChild;
         return rChild;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

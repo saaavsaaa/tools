@@ -2,6 +2,8 @@ package date.iterator.tools.ip;
 
 public class IPTree {
 
+    private int size = 0;
+
     private BitNode root = new BitNode(false);
 
     public void init() {
@@ -14,6 +16,7 @@ public class IPTree {
 
     // During initialization,load all known network segment addresses and the keys of the corresponding data.
     public synchronized void appendNode(final String ip, final int sub,final String key) {
+        size++;
         int[] bits = IPUtil.ip2binary(ip);
         BitNode current = root;
 
@@ -23,6 +26,15 @@ public class IPTree {
             if (ip.equals("211.139.193.0")) {
                 System.out.print(bits[i]);
                 if (i == 12) {
+                    System.out.println();
+                }
+            }
+
+            //101.32.104.0 0110 0101 0010 0000 0110 1000 00000000   21
+            //101.32.96.0  0110 0101 0010 0000 0110 0000 00000000   20
+            if (ip.equals("101.32.104.0")) {
+                System.out.print(bits[i]);
+                if (i == 19) {
                     System.out.println();
                 }
             }
@@ -36,7 +48,6 @@ public class IPTree {
             }
             current = child;
         }
-
         if (ip.equals("211.139.193.0")) {
             // 11010011100010111100000100010100
             // 11010011100010111100000100000000
@@ -44,6 +55,7 @@ public class IPTree {
             System.out.println(IPUtil.ip2binaryString(ip));
         }
         current.setKey(key);
+        current.setIp(ip);
     }
 
 }
