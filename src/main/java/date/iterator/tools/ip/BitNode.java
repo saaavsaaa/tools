@@ -24,16 +24,20 @@ public class BitNode {
         int index = 0;
         BitNode current = this;
         while (index < 32) {
-            BitNode child = current.getChildren()[ipBits[index]];
-            System.out.print(ipBits[index]);
-            if (index == 11) {
+            BitNode[] children = current.getChildren();
+            if (current.getChildren() == null){
+                return "this IP address related network not exist";
+            }
+            BitNode child = children[ipBits[index]];
+            // System.out.print(ipBits[index]);
+            /*if (index == 11) {
                 System.out.print(ipBits[index]);
-            }
-            if (current.getChildren() == null || child == null){
+            }*/
+            if (child == null){
+                if (current.key != null) {
+                    return current.key;
+                }
                 return "this IP address related information not exist";
-            }
-            if (child.key != null) {
-                return key;
             } else {
                 current = child;
                 index++;

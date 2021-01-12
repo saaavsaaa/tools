@@ -20,6 +20,22 @@ public class IPTreeTest {
         System.out.println(ipTree.search("211.139.193.20"));
     }
 
+    @Test
+    public void debugConvertIP() {
+        String ip = "211.139.193.20";
+        String actual = IPUtil.ip2binaryString(ip);
+
+        System.out.println(actual);
+
+        int[] bits = IPUtil.ip2binary(ip);
+        for (int i = 0; i < bits.length; i++) {
+            System.out.print(bits[i]);
+        }
+        System.out.println();
+        ip = "211.139.193.0";
+        System.out.println(IPUtil.ip2binaryString(ip));
+    }
+
     public static IPTree exec(final String command) throws IOException, InterruptedException {
         IPTree ipTree = new IPTree();
 
@@ -41,9 +57,9 @@ public class IPTreeTest {
                 output += line + System.getProperty("line.separator");
                 String ip = line.split(" ")[0];
                 String key = line.split(" ")[1];
-                ipTree.appendNode(ip.split("/")[0], Integer.parseInt(ip.split("/")[1]), key);
-
+                ipTree.appendIP(ip.split("/")[0], Integer.parseInt(ip.split("/")[1]), key);
             }
+//            IPUtil.traversalLevel(ipTree.getRoot());
         } finally {
             if (br != null) {
                 br.close();
