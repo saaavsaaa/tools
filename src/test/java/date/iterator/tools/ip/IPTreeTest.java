@@ -75,7 +75,8 @@ public class IPTreeTest {
     @Test
     public void testToBinary() {
         // byte[] bytes = InetAddress.getByName("10.0.2.15").getAddress();
-        // 101.32.104.0 11001 01001 00000 01101 0 0000000000   21
+        //101.32.104.0 0110 0101 0010 0000 0110 1000 00000000   21
+        //101.32.96.0  0110 0101 0010 0000 0110 0000 00000000   20
         String expect = "1100101001000000110100000000000"; // 11011100101101010010011010010110
         String ip = "101.32.96.0"; // "220.181.38.150"
         long start = System.currentTimeMillis();

@@ -29,10 +29,6 @@ public class BitNode {
                 return "this IP address related network not exist";
             }
             BitNode child = children[ipBits[index]];
-            // System.out.print(ipBits[index]);
-            /*if (index == 11) {
-                System.out.print(ipBits[index]);
-            }*/
             if (child == null){
                 if (current.key != null) {
                     return current.key;
