@@ -30,7 +30,6 @@ public class IPTree {
 
         for (int i = 0; i < sub; i++) {
             boolean value = bits[i] == 1;
-            // System.out.print(bits[i]);
             // 0 left 1 right
             BitNode child = current.getChildren()[bits[i]];
             if (child == null) {
