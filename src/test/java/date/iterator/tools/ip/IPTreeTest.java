@@ -11,6 +11,21 @@ import java.util.List;
 public class IPTreeTest {
     @Test
     public void testSearch() throws IOException, InterruptedException {
+        IPTree ipTree = new IPTree();
+        ipTree.appendIP("101.1.0.0", 22 , "内蒙古-呼和浩特市-电信");
+        ipTree.appendIP("101.104.144.0", 22 , "辽宁省-沈阳市-鹏博士");
+        ipTree.appendIP("101.129.0.0", 16 , "北京-北京市-联通");
+        ipTree.appendIP("101.198.178.0", 23 , "上海-上海市-电信");
+        ipTree.appendIP("170.106.164.0", 23 , "海外-其他-其他");
+        ipTree.appendIP("210.32.0.0", 12 , "浙江省-杭州市-教育网");
+        ipTree.appendIP("211.139.193.0", 24 , "广东省-东莞市-移动");
+        String expect = "广东省-东莞市-移动";
+        String actual = ipTree.search("211.139.193.20");
+        assert expect.equals(actual);
+    }
+
+    @Test
+    public void debugSearch() throws IOException, InterruptedException {
         List<String> cmds = new LinkedList<String>();
         cmds.add("sh");
         cmds.add("-c");
@@ -90,6 +105,6 @@ public class IPTreeTest {
         }
         System.out.println();
         System.out.println(System.currentTimeMillis() - start);
-        System.out.println(expect.equals(actual));
+        assert expect.equals(actual);
     }
 }
