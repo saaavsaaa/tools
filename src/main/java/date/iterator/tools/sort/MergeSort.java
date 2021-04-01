@@ -21,7 +21,7 @@ public class MergeSort {
     }
 
     /*
-    * 递做气氛，归做排序，递归都用上了
+    * 递做切分，归做排序，递归都用上了
     */
     public void recursiveSort(final int[] input) {
         if (input.length == 1) return;
