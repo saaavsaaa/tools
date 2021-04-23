@@ -9,16 +9,9 @@ public class QuickSortTest {
         Integer[] input = new Integer[]{1, 3, 2, 4, 5, 1, 6, 5, 11};
 //        input = new int[]{1, 5, 6, 2, 6, 7};
 //        input = new int[]{1, 2, 6, 2, 3, 4};
-        QuickSort<Integer> sort = new QuickSort(Integer.class);
-        sort.sort(input);
+        QuickSort<Integer> sort = new QuickSort(Integer.class, input);
+        sort.sort();
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
-    }
-
-    @Test
-    public void testElect() {
-        Integer[] input = new Integer[]{1, 3, 2};
-        QuickSort<Integer> sort = new QuickSort(Integer.class);
-        System.out.println(sort.electPivot(input));
     }
 }

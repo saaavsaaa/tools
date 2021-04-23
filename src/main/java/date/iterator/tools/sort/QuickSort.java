@@ -1,40 +1,45 @@
 package date.iterator.tools.sort;
 
 import java.lang.reflect.Array;
+import java.util.Arrays;
 
 public class QuickSort<T extends Comparable<T>> {
-    int high = 0;
-    int low = 0;
-    int divide = 0;
-    T pivot;
+
     final Class<T> type;
+    final T[] input;
 
-    public QuickSort(Class<T> type) {
+    public QuickSort(Class<T> type, T[] input) {
         this.type = type;
+        this.input = input;
     }
 
-    public void sort(final T[] input) {
-        pivot = electPivot(input);
+    public void sort() {
+        sort(0, input.length);
     }
 
-    T electPivot(final T[] input) {
-        T one = input[(int) (System.currentTimeMillis() % input.length)];
-        T two = input[(int) ((System.currentTimeMillis()+100) % input.length)];
-        T three = input[(int) (System.nanoTime() % input.length)];
+    public void sort(int low, int high) {
+        if (high - low < 2) return;
+        int divide = partition(low, high);
+        sort(low, divide);
+        sort(divide + 1, high);
+    }
+    public int partition(int low, int high) {
+        int divide = 0;
+        // index = electPivot(input); 可以随机选三个，返回中间值的索引
+        swap(low, (int) (System.currentTimeMillis() % (input.length - 1)));
+        T pivot = input[low];
+        for (int k = low + 1; k < high; k++) {
+            if (input[k].compareTo(pivot) < 0) {
+                swap(++divide, k);
+            }
+        }
+        swap(low, divide);
+        return divide;
+    }
 
-        T[] candidates = (T[]) Array.newInstance(type, 3);
-        int r = one.compareTo(two);
-        if (r == 0) {
-            return one;
-        }
-        int index1 = r + 1;
-        int index2 = index1 - r;
-        candidates[index1] = one;
-        candidates[index2] = two;
-        if (three.compareTo(candidates[0]) < 0) {
-            return candidates[0];
-        } else {
-            return three.compareTo(candidates[1]) > 0 ? three : candidates[1];
-        }
+    public void swap(int a, int b) {
+        T s = input[a];
+        input[a] = input[b];
+        input[b] = s;
     }
 }
