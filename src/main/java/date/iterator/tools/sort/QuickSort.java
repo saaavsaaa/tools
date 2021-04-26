@@ -1,8 +1,5 @@
 package date.iterator.tools.sort;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 public class QuickSort<T extends Comparable<T>> {
 
     final Class<T> type;
@@ -24,9 +21,9 @@ public class QuickSort<T extends Comparable<T>> {
         sort(divide + 1, high);
     }
     public int partition(int low, int high) {
-        int divide = 0;
+        int divide = low;
         // index = electPivot(input); 可以随机选三个，返回中间值的索引
-        swap(low, (int) (System.currentTimeMillis() % (input.length - 1)));
+        swap(low, low + (int) (System.currentTimeMillis() % (high - low)));
         T pivot = input[low];
         for (int k = low + 1; k < high; k++) {
             if (input[k].compareTo(pivot) < 0) {
