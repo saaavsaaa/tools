@@ -1,12 +1,12 @@
 package date.iterator.tools.sort;
 
+import date.iterator.tools.util.Other;
+
 public class QuickSort<T extends Comparable<T>> {
 
-    final Class<T> type;
     final T[] input;
 
-    public QuickSort(Class<T> type, T[] input) {
-        this.type = type;
+    public QuickSort(T[] input) {
         this.input = input;
     }
 
@@ -23,20 +23,14 @@ public class QuickSort<T extends Comparable<T>> {
     public int partition(int low, int high) {
         int divide = low;
         // index = electPivot(input); 可以随机选三个，返回中间值的索引
-        swap(low, low + (int) (System.currentTimeMillis() % (high - low)));
+        Other.swap(input, low, low + (int) (System.currentTimeMillis() % (high - low)));
         T pivot = input[low];
         for (int k = low + 1; k < high; k++) {
             if (input[k].compareTo(pivot) < 0) {
-                swap(++divide, k);
+                Other.swap(input, ++divide, k);
             }
         }
-        swap(low, divide);
+        Other.swap(input, low, divide);
         return divide;
-    }
-
-    public void swap(int a, int b) {
-        T s = input[a];
-        input[a] = input[b];
-        input[b] = s;
     }
 }

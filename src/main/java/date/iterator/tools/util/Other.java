@@ -28,6 +28,12 @@ public class Other {
         return stringBuffer.toString();
     }
 
+    public static <T extends Comparable<T>> void swap(T[] array, int i, int j) {
+        T s = array[i];
+        array[i] = array[j];
+        array[j] = s;
+    }
+
     /*public static String alignHead(final String str, final int targetLength, final char pack) {
         StringBuffer stringBuffer = null;
         Consumer<Integer> action = (i) -> stringBuffer.insert(i, java.util.Optional.of(pack));

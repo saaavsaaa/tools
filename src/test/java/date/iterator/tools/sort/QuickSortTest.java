@@ -9,7 +9,7 @@ public class QuickSortTest {
         Integer[] input = new Integer[]{1, 3, 6, 4, 5, 1, 2, 5, 11, 100, 9, 7};
 //        input = new Integer[]{1, 5, 6, 2, 6, 7};
 //        input = new Integer[]{1, 2, 6, 2, 3, 4};
-        QuickSort<Integer> sort = new QuickSort(Integer.class, input);
+        QuickSort<Integer> sort = new QuickSort<>(input);
         sort.sort();
         Printer.INSTANCE.setWillPrint(true);
         Printer.INSTANCE.printArray(input);
