@@ -34,6 +34,14 @@ public class Other {
         array[j] = s;
     }
 
+    public static <T extends Comparable<T>> void printArray(final T[] array) {
+        for (T t : array) {
+            System.out.print(t);
+            System.out.print(' ');
+        }
+        System.out.println();
+    }
+
     /*public static String alignHead(final String str, final int targetLength, final char pack) {
         StringBuffer stringBuffer = null;
         Consumer<Integer> action = (i) -> stringBuffer.insert(i, java.util.Optional.of(pack));

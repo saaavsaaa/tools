@@ -1,6 +1,7 @@
 package date.iterator.tools.sort;
 
 import date.iterator.tools.Printer;
+import date.iterator.tools.util.Other;
 import org.junit.Test;
 
 public class QuickSortTest {
@@ -11,7 +12,8 @@ public class QuickSortTest {
 //        input = new Integer[]{1, 2, 6, 2, 3, 4};
         QuickSort<Integer> sort = new QuickSort<>(input);
         sort.sort();
-        Printer.INSTANCE.setWillPrint(true);
-        Printer.INSTANCE.printArray(input);
+//        Printer.INSTANCE.setWillPrint(true);
+//        Printer.INSTANCE.printArray(input);
+        Other.printArray(input);
     }
 }
