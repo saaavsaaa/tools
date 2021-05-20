@@ -1,7 +1,32 @@
 package date.iterator.tools.sort;
 
-public class ShellSort {
+public class ShellSort<T extends Comparable<T>> {
     private int[] stepSequence = null;
+    private final T[] input;
+
+    public ShellSort(T[] input) {
+        stepSequence = sedgewick(20);
+        this.input = input;
+    }
+
+    public void initSequence(SequenceType type, int sequenceLength) {
+        switch (type){
+            case sedgewick:
+            default:
+                stepSequence = sedgewick(sequenceLength);
+                break;
+            case prime:
+                stepSequence = prime(sequenceLength);
+                break;
+            case ps:
+                stepSequence = ps(sequenceLength);
+                break;
+        }
+    }
+
+    public void sort() {
+
+    }
 
     /*
     * The length of the output sequence will be the length of the input sequence
@@ -68,4 +93,10 @@ public class ShellSort {
     private static boolean divideExactly(int dividend, int divisor) {
         return dividend % divisor == 0;
     }
+}
+
+enum SequenceType {
+    sedgewick,
+    ps,
+    prime
 }
