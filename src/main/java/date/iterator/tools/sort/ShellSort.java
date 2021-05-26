@@ -2,11 +2,17 @@ package date.iterator.tools.sort;
 
 public class ShellSort<T extends Comparable<T>> {
     private int[] stepSequence = null;
-    private final T[] input;
 
-    public ShellSort(T[] input) {
+    public ShellSort() {
         stepSequence = sedgewick(20);
-        this.input = input;
+    }
+
+    public ShellSort(SequenceType type) {
+        initSequence(type, 20);
+    }
+
+    public ShellSort(SequenceType type, int sequenceLength) {
+        initSequence(type, sequenceLength);
     }
 
     public void initSequence(SequenceType type, int sequenceLength) {
@@ -24,8 +30,24 @@ public class ShellSort<T extends Comparable<T>> {
         }
     }
 
-    public void sort() {
-
+    public void sort(T[] input) {
+        int j;
+        for (int s = stepSequence.length - 1; s > -1 ; s--) {
+            int step = stepSequence[s];
+            // when the step length is too long, the loop will not be executed
+            if (step >  input.length/ 2) {
+                continue;
+            }
+            for (int i = step; i < input.length; i++) {
+                T pivot_candidate = input[i];
+                j = i - step;
+                while (j >= 0 && pivot_candidate.compareTo(input[j]) < 0) {
+                    input[j + step] = input[j];
+                    j -= step;
+                }
+                input[j + step] = pivot_candidate;
+            }
+        }
     }
 
     /*
