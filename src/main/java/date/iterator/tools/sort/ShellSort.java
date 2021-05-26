@@ -39,13 +39,13 @@ public class ShellSort<T extends Comparable<T>> {
                 continue;
             }
             for (int i = step; i < input.length; i++) {
-                T pivot_candidate = input[i];
+                T current = input[i];
                 j = i - step;
-                while (j >= 0 && pivot_candidate.compareTo(input[j]) < 0) {
+                while (j >= 0 && current.compareTo(input[j]) < 0) {
                     input[j + step] = input[j];
                     j -= step;
                 }
-                input[j + step] = pivot_candidate;
+                input[j + step] = current;
             }
         }
     }
