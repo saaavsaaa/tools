@@ -50,6 +50,20 @@ public class ShellSort<T extends Comparable<T>> {
         }
     }
 
+    public void sortWithInsert(T[] input) {
+        int j;
+        for (int s = stepSequence.length - 1; s > -1 ; s--) {
+            int step = stepSequence[s];
+            // when the step length is too long, the loop will not be executed
+            if (step >  input.length/ 2) {
+                continue;
+            }
+            for (int i = 0; i < step; i++) {
+                InsertionSort.sort(input, i, step);
+            }
+        }
+    }
+
     /*
     * The length of the output sequence will be the length of the input sequence
      */

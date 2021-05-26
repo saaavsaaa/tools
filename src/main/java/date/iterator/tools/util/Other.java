@@ -2,6 +2,8 @@ package date.iterator.tools.util;
 
 // import java.util.function.Consumer;
 
+import date.iterator.tools.Printer;
+
 public class Other {
 
     public static String alignHead(final String str, final int targetLength, final char pack) {
@@ -29,6 +31,7 @@ public class Other {
     }
 
     public static <T extends Comparable<T>> void swap(T[] array, int i, int j) {
+        Printer.INSTANCE.runAt();
         T s = array[i];
         array[i] = array[j];
         array[j] = s;
