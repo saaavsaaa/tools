@@ -41,6 +41,7 @@ public class ShellSort<T extends Comparable<T>> {
             for (int i = step; i < input.length; i++) {
                 T current = input[i];
                 j = i - step;
+
                 while (j >= 0 && current.compareTo(input[j]) < 0) {
                     input[j + step] = input[j];
                     j -= step;
@@ -50,7 +51,12 @@ public class ShellSort<T extends Comparable<T>> {
         }
     }
 
-    public void sortWithInsert(T[] input) {
+    /*
+    * This method just demonstrates how to use InsertionSort.
+    * It runs slowly，because every w-sort needs to perform a InsertionSort throught a loop.
+    * But originally the sequence of the same W could have been completed in one cycle.
+    */
+    public void sortWithInsertionSort(T[] input) {
         int j;
         for (int s = stepSequence.length - 1; s > -1 ; s--) {
             int step = stepSequence[s];
