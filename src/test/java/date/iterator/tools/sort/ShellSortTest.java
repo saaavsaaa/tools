@@ -55,26 +55,26 @@ public class ShellSortTest {
         ShellSort<Integer> shellSort = new ShellSort<>(SequenceType.prime, 10);
         shellSort.sortWithInsertionSort(input);
         Other.printArray(input);
-        Printer.INSTANCE.printIn("prime");
+        Printer.INSTANCE.printIn("prime"); //16
 
         input = new Integer[]{1, 3, 6, 4, 5, 1, 2, 5, 11, 100, 9, 7};
         shellSort = new ShellSort<>(SequenceType.sedgewick, 10);
         shellSort.sortWithInsertionSort(input);
         Other.printArray(input);
-        Printer.INSTANCE.printIn("sedgewick");
+        Printer.INSTANCE.printIn("sedgewick"); //16
 
         input = new Integer[]{1, 3, 6, 4, 5, 1, 2, 5, 11, 100, 9, 7};
         shellSort = new ShellSort<>(SequenceType.ps, 10);
         shellSort.sortWithInsertionSort(input);
         Other.printArray(input);
-        Printer.INSTANCE.printIn("ps");
+        Printer.INSTANCE.printIn("ps"); //14
     }
 
     @Test
     public void testReverseOrderWithInsert() {
         Integer[] input = new Integer[]{10,9,8,7,6,5,4,3,2,1};
         ShellSort<Integer> shellSort = new ShellSort<>(SequenceType.prime, 10);
-        shellSort.sortWithInsertionSort(input); // 9
+        shellSort.sortWithInsertionSort(input);
         Other.printArray(input);
 
         Printer.INSTANCE.printIn("prime");

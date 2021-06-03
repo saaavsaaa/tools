@@ -24,6 +24,14 @@ public class InsertionSort {
                 else
                     break;
         }
+        for (int i = 0; i < step; i++) {
+            for (int j = start + i; j < n - step; j += step) {
+                if(array[j].compareTo( array[j + step] ) > 0)
+                    Other.swap( array, j , j + step );
+                else
+                    break;
+            }
+        }
     }
 
     public static void main(String[] args) {
