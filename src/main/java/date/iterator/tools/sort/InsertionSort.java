@@ -18,18 +18,10 @@ public class InsertionSort {
     public static <T extends Comparable<T>> void sort(final T[] array, final int start, final int step){
         int n = array.length;
         for (int i = start; i < n; i += step) {
-            for(int j = i ; j > 0 ; j --)
-                if(array[j].compareTo( array[j-1] ) < 0)
-                    Other.swap( array, j , j-1 );
-                else
-                    break;
-        }
-        for (int i = 0; i < step; i++) {
-            for (int j = start + i; j < n - step; j += step) {
-                if(array[j].compareTo( array[j + step] ) > 0)
-                    Other.swap( array, j , j + step );
-                else
-                    break;
+            int j = i;
+            while (j - step > -1 && array[j].compareTo(array[j - step]) < 0) {
+                Other.swap(array, j, j - step);
+                j -= step;
             }
         }
     }
