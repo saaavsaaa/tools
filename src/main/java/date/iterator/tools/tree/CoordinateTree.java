@@ -4,7 +4,7 @@ import java.util.*;
 
 public class CoordinateTree {
 
-    CoordinateNode root;
+    public CoordinateNode root;
 
     private boolean initialized = false;
 
@@ -20,7 +20,6 @@ public class CoordinateTree {
         root.setDepth(0);
         root.setHorizontal(recurX(root));
     }
-    int baseHeight = 150;
 
     // X : horizontal coordinate
     Map<Integer, Integer> currentXInLevel = new HashMap<>();
@@ -72,5 +71,33 @@ public class CoordinateTree {
             return currentXInLevel.get(depth);
         }
         return 0;
+    }
+
+    public void print() {
+        Queue<CoordinateNode> nodes = new LinkedList<>();
+        nodes.offer(root);
+        int lastDepth = 0;
+        int lastHorizontal = 0;
+        StringBuffer line = new StringBuffer();
+        while (!nodes.isEmpty()) {
+            CoordinateNode currentNode = nodes.poll();
+            int count = 0;
+            if (currentNode.getDepth() > lastDepth) {
+                lastDepth = currentNode.getDepth();
+                System.out.println(line);
+                line = new StringBuffer();
+                count = currentNode.getHorizontal();
+                lastHorizontal = count;
+            } else {
+                int currentNodeHorizontal = currentNode.getHorizontal();
+                count = currentNodeHorizontal - lastHorizontal;
+                lastHorizontal = currentNodeHorizontal;
+            }
+            if (count > 0) {
+                line.append(String.format("%-" + count + "s", lastDepth));
+            }
+            line.append("*");
+            nodes.addAll(currentNode.getChildren());
+        }
     }
 }
