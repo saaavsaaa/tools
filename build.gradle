@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'date.iterator.tools'
-version '0.1'
+version '0.3'
 
 sourceCompatibility = 1.8
 
@@ -11,12 +11,16 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 repositories {
+    mavenLocal()
+    maven {url "http://10.8.16.17:8081/repository/maven-public/"}
     mavenCentral()
 }
 
 dependencies {
+//    compile fileTree(dir:'libs',includes:['*jar'])
+
     // https://mvnrepository.com/artifact/date.iterator.automaton/State
-//    compile group: 'date.iterator.automaton', name: 'State', version: '1.0.1'
+    compile group: 'date.iterator.automaton', name: 'State', version: '1.0.1'
 
     // https://mvnrepository.com/artifact/date.iterator.count/Iterator
 //    providedCompile group: 'date.iterator.count', name: 'Iterator', version: '1.1.5'
